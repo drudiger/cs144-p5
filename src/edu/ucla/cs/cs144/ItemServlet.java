@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.xml.sax.InputSource;
@@ -65,6 +66,9 @@ public class ItemServlet extends HttpServlet implements Servlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        // Start session
+        HttpSession session = request.getSession(true);
+        
         String id = request.getParameter("id");
         if (id == null) id = "";
         request.setAttribute("id", id);
@@ -86,10 +90,16 @@ public class ItemServlet extends HttpServlet implements Servlet {
             InputSource iSource = new InputSource(sReader);
             Document doc = docBuilder.parse(iSource);
             Element item = doc.getDocumentElement();
+            
+            // Set session attributes
+            session.setAttribute("itemID", item.getAttribute("ItemID"));
+            session.setAttribute("name", getElementTextByTagNameNR(item, "Name"));
+            session.setAttribute("buyPrice", getElementTextByTagNameNR(item, "Buy_Price"));
 
 			// Set item attributes
 			request.setAttribute("itemID", item.getAttribute("ItemID"));
 			request.setAttribute("name", getElementTextByTagNameNR(item, "Name"));
+			request.setAttribute("buyPrice", getElementTextByTagNameNR(item, "Buy_Price");
 			request.setAttribute("firstBid", getElementTextByTagNameNR(item, "First_Bid"));
 			request.setAttribute("numberOfBids", getElementTextByTagNameNR(item, "Number_of_Bids"));
 			request.setAttribute("location", getElementTextByTagNameNR(item, "Location"));
