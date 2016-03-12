@@ -76,8 +76,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <p>Categories: <%= request.getAttribute("categories")%></p>
   <% String buyPrice = (String)request.getAttribute("buyPrice");
   if (!buyPrice.equals("")) {
-    out.print("Buy Price: " + buyPrice);
-    out.print("<a href=\"/eBay/transaction\">Pay Now!</a>");} %>
+    out.print("Buy Price: " + buyPrice + "   ");
+    out.print("<a href=\"/eBay/payment\">Pay Now</a>");} %>
   <p>First Bid: <%= request.getAttribute("firstBid")%></p>
   <p>Number of Bids: <%= request.getAttribute("numberOfBids")%></p>
   <p>Location: <%= request.getAttribute("location")%></p>
