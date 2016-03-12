@@ -20,7 +20,7 @@ public class ConfirmationServlet extends HttpServlet implements Servlet {
     request.setAttribute("name", (String)session.getAttribute("name"));
     request.setAttribute("buyPrice", (String)session.getAttribute("buyPrice"));
     request.setAttribute("creditCardNum", (String)request.getParameter("creditCardNum"));
-    request.setAttribute("time", DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG).format(now));
+    request.setAttribute("time", DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG).format(time));
 
     request.getRequestDispatcher("/confirmation.jsp").forward(request, response);
   }
